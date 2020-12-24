@@ -1,0 +1,108 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\StorageLayer\\StorageLayer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj",
+        "projectName": "ReportsSystem",
+        "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj",
+        "packagesPath": "C:\\Users\\NIKITOS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\NIKITOS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\StorageLayer\\StorageLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\StorageLayer\\StorageLayer.csproj",
+        "projectName": "StorageLayer",
+        "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\StorageLayer\\StorageLayer.csproj",
+        "packagesPath": "C:\\Users\\NIKITOS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\StorageLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\NIKITOS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {
+              "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj": {
+                "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

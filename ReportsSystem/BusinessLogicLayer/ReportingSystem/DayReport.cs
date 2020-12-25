@@ -7,7 +7,7 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
     {
         public DayReport(string userId, DateTime lastReportTime)
         {
-            _tasks = TaskManagementSystem.TaskManagementSystem.EmployeeTasksForPeriod(userId, lastReportTime);
+            Tasks = TaskManagementSystem.TaskManagementSystem.EmployeeResolvedTasksForPeriod(userId, lastReportTime);
             AddToReportsData(userId);
         }
 

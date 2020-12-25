@@ -49,9 +49,21 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 
         public void CreateSprintReport(string name)
         {
-            throw new NotImplementedException();
+            var resolvedTasks = FindTeamResolvedTasks();
+            var sprintReport = new SprintReport(Id, resolvedTasks);
+            sprintReport.CreateReport(name);
         }
 
+        private List<Task> FindTeamResolvedTasks()
+        {
+            var result = new List<Task>();
+            foreach (var task in from subordinate in _subordinates from task in subordinate.AllResolved() where !result.Contains(task) select task)
+            {
+                result.Add(task);
+            }
+
+            return result;
+        }
         public void OpenTask(string id)
         {
             TaskManagementSystem.TaskManagementSystem.OpenTask(this, id);
@@ -74,9 +86,15 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 
         public void UpdateTaskEmployee(string taskId, IEmployee assigned)
         {
+            if (!IsMySubordinate(assigned)) throw new EmployeeUpdateException();
             TaskManagementSystem.TaskManagementSystem.UpdateTaskEmployee(this, taskId, assigned);
         }
 
+        private bool IsMySubordinate(IEmployee assigned)
+        {
+            return _subordinates.Contains(assigned);
+        }
+        
         public Task GetTask(string id)
         {
             return TaskManagementSystem.TaskManagementSystem.Task(id);

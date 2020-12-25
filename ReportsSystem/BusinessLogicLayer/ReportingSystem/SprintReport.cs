@@ -8,10 +8,15 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
     {
         public SprintReport(string userId, List<DayReport> sprint)
         {
-            _tasks = SelectAllTasksForSprint(sprint);
+            Tasks = SelectAllTasksForSprint(sprint);
             AddToReportsData(userId);
         }
 
+        public SprintReport(string userId, List<Task> resolvedTasks)
+        {
+            Tasks = resolvedTasks;
+            AddToReportsData(userId);
+        }
         private List<Task> SelectAllTasksForSprint(List<DayReport> sprint)
         {
             var result = new List<Task>();

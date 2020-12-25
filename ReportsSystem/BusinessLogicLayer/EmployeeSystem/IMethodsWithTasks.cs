@@ -13,7 +13,6 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         void ActiveTask(string id);
         void ResolveTask(string id);
         void CreateCommit(string taskId, string commit);
-        void UpdateTaskEmployee(string taskId, IEmployee assigned);
         Task GetTask(string id);
         List<Task> MyTasks();
         List<Task> TasksByChangeCreateTime(DateTime dateTime);

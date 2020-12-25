@@ -10,5 +10,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 
         List<ISubordinate> Subordinates();
         List<Task> TasksAssignedToSubordinates();
+        
+        void UpdateTaskEmployee(string taskId, IEmployee assigned);
     }
 }

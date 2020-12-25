@@ -91,19 +91,13 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
             return result;
         }
 
-        public static List<Task> EmployeeTasksForPeriod(string employeeId, DateTime lowTime)
+        public static List<Task> EmployeeResolvedTasksForPeriod(string employeeId, DateTime lowTime)
         {
             var result = new List<Task>();
-            foreach (var employeeChanges in TaskData.ChangesByEmployeeId.Values)
-            {
-                foreach (var change in employeeChanges)
-                {
-                    if (change.CreateTime > lowTime && !result.Contains(change.TaskReference))
-                    {
-                        result.Add(change.TaskReference);
-                    }
-                }
-            }
+            foreach (var change in TaskData.ChangesByEmployeeId[employeeId])
+                if (change.CreateTime > lowTime && !result.Contains(change.TaskReference) &&
+                    change.State == BusinessLogicLayer.TaskManagementSystem.Task.State.Resolved)
+                    result.Add(change.TaskReference);
 
             return result;
         }

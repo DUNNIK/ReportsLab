@@ -7,6 +7,5 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
     {
         string Id { get; }
         string Hierarchy();
-        
     }
 }

@@ -12,15 +12,11 @@ namespace ReportsLab.StorageLayer
         {
             fileName = @$"{fileName}";
             var filePath = Path.Combine(FolderPath, fileName);
-            var writer = new StreamWriter(filePath);
-            try
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.Write(data);
             }
-            catch
-            {
-                throw new FileAddException();
-            }
         }
+        
     }
 }

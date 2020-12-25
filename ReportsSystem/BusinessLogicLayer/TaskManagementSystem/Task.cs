@@ -90,7 +90,7 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
         {
             if (_currentState == State.Active || _currentState == State.Resolved) return null;
             _currentState = State.Open;
-
+            
             return CreateNewMemento();
         }
 
@@ -116,7 +116,7 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
 
         public override string ToString()
         {
-            return $"{Name} task\nState: {_currentState.ToString()}{Description}\n";
+            return $"{Name} task\nState: {_currentState.ToString()}\n{Description}\n";
         }
 
         public DateTime LastChangeDateTime()

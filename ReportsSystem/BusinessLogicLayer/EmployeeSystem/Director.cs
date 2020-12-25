@@ -37,16 +37,58 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return resultString;
         }
 
+        public List<Task> AllResolved()
+        {
+            var result = new List<Task>();
+            AddMyResolvedTasks(result);
+            AddSubordinatesResolvedTasks(result);
+            return result;
+        }
+        private void AddMyResolvedTasks(ICollection<Task> result){
+            foreach (var task in from dayReport in _dayReports
+                from task in dayReport.Tasks
+                where !result.Contains(task)
+                select task)
+            {
+                result.Add(task);
+            }
+        }
+
+        private void AddSubordinatesResolvedTasks(ICollection<Task> result)
+        {
+            foreach (var task in from subordinate in _subordinates
+                from task in subordinate.AllResolved()
+                where !result.Contains(task)
+                select task)
+            {
+                result.Add(task);
+            }
+        }
         public void CreateDayReport(string name)
         {
-            var report = new DayReport(Id, _dayReports.Last().CreateTime);
+            var report = new DayReport(Id, LastReportTime());
             _dayReports.Add(report);
             report.CreateReport(name);
         }
 
+        private DateTime LastReportTime()
+        {
+            DateTime reportTime;
+            if (_dayReports.Count == 0)
+            {
+                reportTime = DateTime.Today;
+            }
+            else
+            {
+                reportTime = _dayReports.Last().CreateTime;
+            }
+
+            return reportTime;
+        }
         public void CreateSprintReport(string name)
         {
-            throw new NotImplementedException();
+            var sprintReport = new SprintReport(Id, _dayReports);
+            sprintReport.CreateReport(name);
         }
 
         public void GetNewDirector(IDirector newDirector)
@@ -114,9 +156,14 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 
         public void UpdateTaskEmployee(string taskId, IEmployee assigned)
         {
+            if (!IsMySubordinate(assigned)) throw new EmployeeUpdateException();
             TaskManagementSystem.TaskManagementSystem.UpdateTaskEmployee(this, taskId, assigned);
         }
 
+        private bool IsMySubordinate(IEmployee assigned)
+        {
+            return _subordinates.Contains(assigned);
+        }
         public Task GetTask(string id)
         {
             return TaskManagementSystem.TaskManagementSystem.Task(id);

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "q4DyPH2BHyrP2ojUh7SuTM0U3fe2Xlc99fNweqWIQxbYYN7oARgsYDbR4hvsSbV6Vz+zaV1YxA0MJFOiA0hveg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\Reports.Tests\\Reports.Tests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\NIKITOS\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
+    "C:\\Users\\NIKITOS\\.nuget\\packages\\microsoft.net.test.sdk\\16.5.0\\microsoft.net.test.sdk.16.5.0.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
+    "C:\\Users\\NIKITOS\\.nuget\\packages\\nunit3testadapter\\3.16.1\\nunit3testadapter.3.16.1.nupkg.sha512"
+  ],
+  "logs": []
+}

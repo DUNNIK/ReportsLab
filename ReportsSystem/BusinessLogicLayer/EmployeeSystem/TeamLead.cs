@@ -10,7 +10,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 {
     public class TeamLead : IDirector, IMethodsWithTasks
     {
-        private List<DayReport> _dayReports = new List<DayReport>();
+        private readonly List<DayReport> _dayReports = new List<DayReport>();
         private readonly string _name;
         private readonly List<ISubordinate> _subordinates;
 
@@ -37,14 +37,19 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 
         public string CreateTask(string name, string description)
         {
-            return TaskManagementSystem.TaskManagementSystem.CreateTask(this, name, description);
+            return TaskManagementSystem.TaskManagementSystem.CreateTask(name, description);
         }
 
         public void CreateDayReport(string name)
         {
-            var report = new DayReport(Id, _dayReports.Last().CreateTime);
+            var report = new DayReport(Id, LastReportTime());
             _dayReports.Add(report);
             report.CreateReport(name);
+        }
+
+        private DateTime LastReportTime()
+        {
+            return _dayReports.Count == 0 ? DateTime.Today : _dayReports.Last().CreateTime;
         }
 
         public void CreateSprintReport(string name)

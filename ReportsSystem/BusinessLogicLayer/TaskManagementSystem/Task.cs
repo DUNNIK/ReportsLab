@@ -123,6 +123,10 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
         {
             return _changes.Last().CreateTime;
         }
-        
+
+        public State Status()
+        {
+            return _currentState;
+        }
     }
 }

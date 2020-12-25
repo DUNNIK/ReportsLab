@@ -10,7 +10,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 {
     public class Director : IDirector, ISubordinate, IMethodsWithTasks
     {
-        private List<DayReport> _dayReports = new List<DayReport>();
+        private readonly List<DayReport> _dayReports = new List<DayReport>();
         private readonly string _name;
         private IDirector _director;
         private readonly List<ISubordinate> _subordinates;
@@ -37,7 +37,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return resultString;
         }
 
-        public List<Task> AllResolved()
+        public IEnumerable<Task> AllResolved()
         {
             var result = new List<Task>();
             AddMyResolvedTasks(result);
@@ -73,17 +73,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 
         private DateTime LastReportTime()
         {
-            DateTime reportTime;
-            if (_dayReports.Count == 0)
-            {
-                reportTime = DateTime.Today;
-            }
-            else
-            {
-                reportTime = _dayReports.Last().CreateTime;
-            }
-
-            return reportTime;
+            return _dayReports.Count == 0 ? DateTime.Today : _dayReports.Last().CreateTime;
         }
         public void CreateSprintReport(string name)
         {
@@ -131,7 +121,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         }
         public string CreateTask(string name, string description)
         {
-            return TaskManagementSystem.TaskManagementSystem.CreateTask(this, name, description);
+            return TaskManagementSystem.TaskManagementSystem.CreateTask(name, description);
         }
 
         public void OpenTask(string id)

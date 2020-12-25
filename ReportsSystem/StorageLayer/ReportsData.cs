@@ -3,8 +3,8 @@ using ReportsLab.BusinessLogicLayer.ReportingSystem;
 
 namespace ReportsLab.StorageLayer
 {
-    public class ReportsData
+    public static class ReportsData
     {
-        public static Dictionary<string, List<Report>> EmployeeDayReports = new Dictionary<string, List<Report>>();
+        public static readonly Dictionary<string, List<Report>> EmployeeDayReports = new Dictionary<string, List<Report>>();
     }
 }

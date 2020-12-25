@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using ReportsLab.StorageLayer.Exceptions;
+﻿using System.IO;
 
 namespace ReportsLab.StorageLayer
 {
@@ -12,10 +10,8 @@ namespace ReportsLab.StorageLayer
         {
             fileName = @$"{fileName}";
             var filePath = Path.Combine(FolderPath, fileName);
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                writer.Write(data);
-            }
+            using var writer = new StreamWriter(filePath);
+            writer.Write(data);
         }
         
     }

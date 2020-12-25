@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ReportsLab.BusinessLogicLayer.EmployeeSystem;
 using ReportsLab.StorageLayer;
 
@@ -38,15 +39,9 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
         public static List<Task> TasksByChangeCreateTime(DateTime changesTime)
         {
             var result = new List<Task>();
-            foreach (var employeeChanges in TaskData.ChangesByEmployeeId.Values)
+            foreach (var change in from employeeChanges in TaskData.ChangesByEmployeeId.Values from change in employeeChanges where change.CreateTime == changesTime && !result.Contains(change.TaskReference) select change)
             {
-                foreach (var change in employeeChanges)
-                {
-                    if (change.CreateTime == changesTime && !result.Contains(change.TaskReference))
-                    {
-                        result.Add(change.TaskReference);
-                    }
-                }
+                result.Add(change.TaskReference);
             }
 
             return result;
@@ -54,54 +49,29 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
         
         public static List<Task> TasksByLastChangeTime(DateTime changesTime)
         {
-            var result = new List<Task>();
-            foreach (var task in TaskData.TasksById.Values)
-            {
-                if (changesTime == task.LastChangeDateTime())
-                {
-                    result.Add(task);
-                }
-            }
-
-            return result;
+            return TaskData.TasksById.Values.Where(task => changesTime == task.LastChangeDateTime()).ToList();
         }
         
         public static List<Task> TasksEmployeeChanged(string employeeId)
         {
-            var result = new List<Task>();
-            foreach (var changes in TaskData.ChangesByEmployeeId[employeeId])
-            {
-                result.Add(changes.TaskReference);
-            }
-
-            return result;
+            return TaskData.ChangesByEmployeeId[employeeId].Select(changes => changes.TaskReference).ToList();
         }
 
         public static List<Task> TasksAssignedToSubordinates(IDirector director)
         {
-            var result = new List<Task>();
-            foreach (var subordinate in director.Subordinates())
-            {
-                foreach (var task in TasksEmployee(subordinate.Id))
-                {
-                    result.Add(task);
-                }
-            }
-
-            return result;
+            return director.Subordinates().SelectMany(subordinate => TasksEmployee(subordinate.Id)).ToList();
         }
 
         public static List<Task> EmployeeResolvedTasksForPeriod(string employeeId, DateTime lowTime)
         {
             var result = new List<Task>();
-            foreach (var change in TaskData.ChangesByEmployeeId[employeeId])
-                if (change.CreateTime > lowTime && !result.Contains(change.TaskReference) &&
-                    change.State == BusinessLogicLayer.TaskManagementSystem.Task.State.Resolved)
-                    result.Add(change.TaskReference);
+            foreach (var change in TaskData.ChangesByEmployeeId[employeeId].Where(change => change.CreateTime > lowTime && !result.Contains(change.TaskReference) &&
+                change.State == BusinessLogicLayer.TaskManagementSystem.Task.State.Resolved))
+                result.Add(change.TaskReference);
 
             return result;
         }
-        public static string CreateTask(IEmployee creator, string name, string description)
+        public static string CreateTask(string name, string description)
         {
             var newTask = new Task(name, description);
             AddToTaskByIdDatabase(newTask.Id, newTask);

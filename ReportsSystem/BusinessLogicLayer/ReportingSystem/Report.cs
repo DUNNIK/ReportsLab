@@ -17,7 +17,7 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
 
         public void CreateReport(string name)
         {
-            var resultString = Tasks.Aggregate("", (current, task) => current + task.ToString());
+            var resultString = Tasks.Aggregate("", (current, task) => current + task);
             StorageLayer.Storage.CreateFile(name, resultString);
         }
     }

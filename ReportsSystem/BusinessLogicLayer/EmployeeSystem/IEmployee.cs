@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using ReportsLab.BusinessLogicLayer.TaskManagementSystem;
-
+﻿
 namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 {
     public interface IEmployee

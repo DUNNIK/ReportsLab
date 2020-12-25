@@ -8,6 +8,6 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         void GetNewDirector(IDirector director);
         bool IsThereADirecter();
         IDirector Director();
-        List<Task> AllResolved();
+        IEnumerable<Task> AllResolved();
     }
 }

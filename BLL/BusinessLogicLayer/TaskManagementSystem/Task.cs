@@ -1,40 +1,44 @@
 ﻿using System;
 using System.Linq;
+using DAL.StorageLayer.Task;
 using ReportsLab.BusinessLogicLayer.EmployeeSystem;
 
 namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
 {
     public class Task
     {
-        public string Id { get; }
         public DAL.StorageLayer.Task.Task _task;
+
         public Task(string name, string description)
         {
             _task = new DAL.StorageLayer.Task.Task(name, description);
             Id = _task.Id;
             ChangesUpdate();
         }
-        public DAL.StorageLayer.Task.TaskMemento AddComment(string comment)
+
+        public string Id { get; }
+
+        public TaskMemento AddComment(string comment)
         {
             _task.Comments.Add(comment);
             ChangesUpdate();
             return CreateNewMemento();
         }
 
-        public DAL.StorageLayer.Task.TaskMemento AssignEmployee(IEmployee employee)
+        public TaskMemento AssignEmployee(IEmployee employee)
         {
             _task.AssignedEmployee = employee.EmployeeInfo;
             ChangesUpdate();
             return CreateNewMemento();
         }
-        
+
         private void ChangesUpdate()
         {
             _task.Changes.Add(CreateNewMemento());
             _task.CurrentChange++;
         }
 
-        public void Restore(DAL.StorageLayer.Task.TaskMemento memento)
+        public void Restore(TaskMemento memento)
         {
             if (memento == null) return;
             RestoreInfoFromMemento(memento);
@@ -42,13 +46,14 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
             _task.CurrentChange = _task.Changes.Count - 1;
         }
 
-        private void RestoreInfoFromMemento(DAL.StorageLayer.Task.TaskMemento memento)
+        private void RestoreInfoFromMemento(TaskMemento memento)
         {
             _task.CurrentState = memento.State;
             _task.AssignedEmployee = memento.Employee;
             _task.Comments = memento.Comments;
         }
-        public DAL.StorageLayer.Task.TaskMemento Undo()
+
+        public TaskMemento Undo()
         {
             if (_task.CurrentChange <= 0) return null;
             var memento = _task.Changes[--_task.CurrentChange];
@@ -56,7 +61,7 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
             return memento;
         }
 
-        public DAL.StorageLayer.Task.TaskMemento Redo()
+        public TaskMemento Redo()
         {
             if (_task.CurrentChange + 1 < _task.Changes.Count)
             {
@@ -67,35 +72,33 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
 
             return null;
         }
-        private DAL.StorageLayer.Task.TaskMemento CreateNewMemento()
+
+        private TaskMemento CreateNewMemento()
         {
-            return new DAL.StorageLayer.Task.TaskMemento(_task.CurrentState, _task.AssignedEmployee, _task.Comments, _task);
+            return new TaskMemento(_task.CurrentState, _task.AssignedEmployee, _task.Comments, _task);
         }
 
-        public DAL.StorageLayer.Task.TaskMemento Open()
+        public TaskMemento Open()
         {
-            if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Active || _task.CurrentState == DAL.StorageLayer.Task.Task.State.Resolved) return null;
+            if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Active ||
+                _task.CurrentState == DAL.StorageLayer.Task.Task.State.Resolved) return null;
             _task.CurrentState = DAL.StorageLayer.Task.Task.State.Open;
-            
+
             return CreateNewMemento();
         }
 
-        public DAL.StorageLayer.Task.TaskMemento Active()
+        public TaskMemento Active()
         {
             if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Open)
-            {
                 _task.CurrentState = DAL.StorageLayer.Task.Task.State.Active;
-            }
 
             return CreateNewMemento();
         }
 
-        public DAL.StorageLayer.Task.TaskMemento Resolved()
+        public TaskMemento Resolved()
         {
             if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Active)
-            {
                 _task.CurrentState = DAL.StorageLayer.Task.Task.State.Resolved;
-            }
 
             return CreateNewMemento();
         }

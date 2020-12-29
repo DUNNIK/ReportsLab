@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DAL.StorageLayer.Infrastructure;
 
-namespace DAL.StorageLayer.Employee
+namespace DAL.Entities.Employee
 {
     public static class EmployeeData
     {

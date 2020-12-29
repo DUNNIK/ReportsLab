@@ -21,9 +21,7 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
         private void CreateNewIfNotIdReportsData(string userId)
         {
             if (!ReportsData.EmployeeDayReports.ContainsKey(userId))
-            {
                 ReportsData.EmployeeDayReports.Add(userId, new List<Report>());
-            }
         }
     }
 }

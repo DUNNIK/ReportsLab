@@ -8,7 +8,7 @@ namespace DAL.StorageLayer.Report
     {
         public readonly DateTime CreateTime = DateTime.Now;
         public List<Task.Task> Tasks = new List<Task.Task>();
-        
+
         public List<Task.Task> ReportTasks()
         {
             return Tasks;

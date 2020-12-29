@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using DAL.StorageLayer.Task;
 using NUnit.Framework;
 using ReportsLab.BusinessLogicLayer.EmployeeSystem;
-using Task = DAL.StorageLayer.Task.Task;
 
 namespace Reports.Tests
 {
     [TestFixture]
     public class Tests
     {
-        private TeamLead _teamLead;
-        private Director _director;
-        private Employee _employee1;
-        private Employee _employee2;
-        private string _physicsTaskId;
         [SetUp]
         public void Setup()
         {
@@ -27,8 +22,13 @@ namespace Reports.Tests
             _director.TransferEmployeeToAnotherDirector(_employee2, _teamLead);
 
             _physicsTaskId = _director.CreateTask("Make Physics", "Shit");
-            
         }
+
+        private TeamLead _teamLead;
+        private Director _director;
+        private Employee _employee1;
+        private Employee _employee2;
+        private string _physicsTaskId;
 
         [Test]
         public void CreateNewTaskAndOpen_1TaskOpen_CorrectString()
@@ -62,9 +62,10 @@ namespace Reports.Tests
             {
                 fileData1 = sr.ReadToEnd();
             }
+
             Assert.That(fileData1, Is.EqualTo("Task task\nState: Resolved\nTask for create test\n"));
         }
-            
+
         [Test]
         public void CreateReport_TeamLeadAndDirectorCreateReports_CorrectPhysicalFiles()
         {
@@ -78,11 +79,13 @@ namespace Reports.Tests
             {
                 fileData1 = sr.ReadToEnd();
             }
+
             string fileData;
             using (var sr = new StreamReader(@"D:\ООП\DirectorDayReport.txt"))
             {
                 fileData = sr.ReadToEnd();
             }
+
             Assert.That(fileData1, Is.EqualTo("Make Physics task\nState: Resolved\nShit\n"));
             Assert.That(fileData, Is.EqualTo("Make Physics task\nState: Resolved\nShit\n"));
         }
@@ -92,9 +95,9 @@ namespace Reports.Tests
         {
             _director.ActiveTask(_physicsTaskId);
             var twoSecondsAgo = DateTime.Now;
-            
+
             Thread.Sleep(2000);
-            
+
             Assert.That(_director.TasksByChangeCreateTime(twoSecondsAgo).Count, Is.EqualTo(1));
             Assert.That(_director.TasksByChangeCreateTime(DateTime.Now).Count, Is.EqualTo(0));
         }

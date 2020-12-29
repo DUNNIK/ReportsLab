@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ReportsLab.BusinessLogicLayer.TaskManagementSystem;
+using DAL.StorageLayer.Task;
 
 namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 {
@@ -9,8 +9,8 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         void TransferEmployeeToAnotherDirector(ISubordinate subordinate, IDirector newDirector);
 
         List<ISubordinate> Subordinates();
-        List<DAL.StorageLayer.Task.Task> TasksAssignedToSubordinates();
-        
+        List<Task> TasksAssignedToSubordinates();
+
         void UpdateTaskEmployee(string taskId, IEmployee assigned);
     }
 }

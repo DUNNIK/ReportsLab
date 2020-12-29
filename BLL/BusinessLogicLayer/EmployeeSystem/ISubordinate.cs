@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ReportsLab.BusinessLogicLayer.TaskManagementSystem;
+using DAL.StorageLayer.Task;
 
 namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 {
@@ -8,6 +8,6 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         void GetNewDirector(IDirector director);
         bool IsThereADirecter();
         IDirector Director();
-        IEnumerable<DAL.StorageLayer.Task.Task> AllResolved();
+        IEnumerable<Task> AllResolved();
     }
 }

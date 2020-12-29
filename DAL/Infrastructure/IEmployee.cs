@@ -1,7 +1,4 @@
-﻿
-using System.Collections.Generic;
-
-namespace DAL.StorageLayer.Infrastructure
+﻿namespace DAL.StorageLayer.Infrastructure
 {
     public interface IEmployee
     {

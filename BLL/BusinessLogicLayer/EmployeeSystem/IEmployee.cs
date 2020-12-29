@@ -1,5 +1,4 @@
-﻿
-namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
+﻿namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
 {
     public interface IEmployee
     {

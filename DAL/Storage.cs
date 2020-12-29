@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using DAL.StorageLayer.Infrastructure;
 
 namespace DAL.StorageLayer
 {
@@ -14,6 +13,5 @@ namespace DAL.StorageLayer
             using var writer = new StreamWriter(filePath);
             writer.Write(data);
         }
-        
     }
 }

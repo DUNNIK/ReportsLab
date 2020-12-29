@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DAL
+namespace UI
 {
     internal class Program
     {

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using DAL.StorageLayer.Infrastructure;
 
-namespace DAL.StorageLayer.Employee
+namespace DAL.Entities.Employee
 {
     public class Employee : IEmployee
     {
-
         public Employee(string name)
         {
             Name = name;

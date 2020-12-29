@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using ReportsLab.BusinessLogicLayer.EmployeeSystem;
-using static System.Console;
-namespace ReportsLab
+﻿namespace ReportsLab
 {
-    static class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
         }
     }

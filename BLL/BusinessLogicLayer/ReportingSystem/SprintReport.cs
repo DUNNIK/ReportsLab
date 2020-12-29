@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DAL.StorageLayer.Report;
-using ReportsLab.BusinessLogicLayer.TaskManagementSystem;
+using DAL.StorageLayer.Task;
 
 namespace ReportsLab.BusinessLogicLayer.ReportingSystem
 {
@@ -13,24 +13,24 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
             AddToReportsData(userId);
         }
 
-        public SprintReport(string userId, List<DAL.StorageLayer.Task.Task> resolvedTasks)
+        public SprintReport(string userId, List<Task> resolvedTasks)
         {
             Tasks = resolvedTasks;
             AddToReportsData(userId);
         }
-        private List<DAL.StorageLayer.Task.Task> SelectAllTasksForSprint(List<DayReport> sprint)
+
+        private List<Task> SelectAllTasksForSprint(List<DayReport> sprint)
         {
-            var result = new List<DAL.StorageLayer.Task.Task>();
+            var result = new List<Task>();
             foreach (var task in from report in sprint
                 from task in report.ReportTasks()
                 where !result.Contains(task)
                 select task)
-            {
                 result.Add(task);
-            }
 
             return result;
         }
+
         private void AddToReportsData(string userId)
         {
             CreateNewIfNotIdReportsData(userId);
@@ -40,9 +40,7 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
         private void CreateNewIfNotIdReportsData(string userId)
         {
             if (!ReportsData.EmployeeDayReports.ContainsKey(userId))
-            {
                 ReportsData.EmployeeDayReports.Add(userId, new List<Report>());
-            }
         }
     }
 }

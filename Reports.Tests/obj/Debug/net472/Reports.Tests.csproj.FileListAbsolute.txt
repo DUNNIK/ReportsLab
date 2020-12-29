@@ -6,9 +6,6 @@ C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\Reports
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\Reports.Tests.pdb
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\nunit.framework.dll
-C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\ReportsSystem.exe
-C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\ReportsSystem.pdb
-C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\ReportsSystem.exe.config
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports.Tests.csprojAssemblyReference.cache
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports.Tests.AssemblyInfoInputs.cache
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports.Tests.AssemblyInfo.cs
@@ -16,3 +13,9 @@ C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports.Tests.csproj.CopyComplete
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports.Tests.dll
 C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\obj\Debug\net472\Reports.Tests.pdb
+C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\DAL.exe
+C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\DAL.pdb
+C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\DAL.exe.config
+C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\BLL.exe
+C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\BLL.pdb
+C:\Users\NIKITOS\RiderProjects\ReportsLab\Reports.Tests\bin\Debug\net472\BLL.exe.config

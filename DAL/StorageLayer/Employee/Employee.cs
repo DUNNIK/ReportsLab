@@ -6,14 +6,13 @@ namespace DAL.StorageLayer.Employee
 {
     public class Employee : IEmployee
     {
-        private readonly List<Report.Report> _dayReports = new List<Report.Report>();
-        private readonly string _name;
 
         public Employee(string name)
         {
-            _name = name;
+            Name = name;
         }
 
         public string Id { get; } = Guid.NewGuid().ToString();
+        public string Name { get; }
     }
 }

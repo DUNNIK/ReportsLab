@@ -46,6 +46,19 @@
           "build/net35/NUnit3TestAdapter.props": {}
         }
       },
+      "BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BLL.dll": {}
+        }
+      },
       "DAL/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
@@ -54,19 +67,6 @@
         },
         "runtime": {
           "bin/placeholder/DAL.dll": {}
-        }
-      },
-      "ReportsSystem/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.7.2",
-        "dependencies": {
-          "DAL": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ReportsSystem.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ReportsSystem.dll": {}
         }
       }
     }
@@ -180,23 +180,23 @@
         "nunit3testadapter.nuspec"
       ]
     },
+    "BLL/1.0.0": {
+      "type": "project",
+      "path": "../BLL/BLL.csproj",
+      "msbuildProject": "../BLL/BLL.csproj"
+    },
     "DAL/1.0.0": {
       "type": "project",
       "path": "../DAL/DAL.csproj",
       "msbuildProject": "../DAL/DAL.csproj"
-    },
-    "ReportsSystem/1.0.0": {
-      "type": "project",
-      "path": "../ReportsSystem/ReportsSystem.csproj",
-      "msbuildProject": "../ReportsSystem/ReportsSystem.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
+      "BLL >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.5.0",
       "NUnit >= 3.12.0",
-      "NUnit3TestAdapter >= 3.16.1",
-      "ReportsSystem >= 1.0.0"
+      "NUnit3TestAdapter >= 3.16.1"
     ]
   },
   "packageFolders": {
@@ -231,8 +231,8 @@
         "net472": {
           "targetAlias": "net472",
           "projectReferences": {
-            "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj": {
-              "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj"
+            "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\BLL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\BLL\\BLL.csproj"
             }
           }
         }

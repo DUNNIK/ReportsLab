@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DAL.StorageLayer.Infrastructure;
 
 namespace DAL.StorageLayer.Task
@@ -9,11 +10,11 @@ namespace DAL.StorageLayer.Task
         public readonly string Id = Guid.NewGuid().ToString();
         public readonly string Name;
         public readonly string Description;
-        public IEmployee _assignedEmployee;
-        private State _currentState;
-        public List<string> _comments = new List<string>();
-        private readonly List<TaskMemento> _changes = new List<TaskMemento>();
-        private int _currentChange;
+        public IEmployee AssignedEmployee;
+        public State CurrentState;
+        public List<string> Comments = new List<string>();
+        public readonly List<TaskMemento> Changes = new List<TaskMemento>();
+        public int CurrentChange;
         public enum State
         {
             Open,
@@ -28,7 +29,16 @@ namespace DAL.StorageLayer.Task
         
         public override string ToString()
         {
-            return $"{Name} task\nState: {_currentState.ToString()}\n{Description}\n";
+            return $"{Name} task\nState: {CurrentState.ToString()}\n{Description}\n";
+        }
+        public DateTime LastChangeDateTime()
+        {
+            return Changes.Last().CreateTime;
+        }
+
+        public State Status()
+        {
+            return CurrentState;
         }
     }
 }

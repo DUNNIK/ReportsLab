@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsSystem", "ReportsSystem\ReportsSystem.csproj", "{FCA6C163-95E4-48E8-819C-B7BB2307ADC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{FCA6C163-95E4-48E8-819C-B7BB2307ADC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reports.Tests", "Reports.Tests\Reports.Tests.csproj", "{7C7C1B1D-52CC-4CDC-A4D8-D71E2261A297}"
 EndProject

@@ -19,8 +19,8 @@
     "frameworks": {
       "net472": {
         "projectReferences": {
-          "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj": {
-            "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj"
+          "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\BLL\\BLL.csproj": {
+            "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\BLL\\BLL.csproj"
           }
         }
       }

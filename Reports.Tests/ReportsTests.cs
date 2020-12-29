@@ -4,9 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using ReportsLab.BusinessLogicLayer.EmployeeSystem;
-using ReportsLab.BusinessLogicLayer.TaskManagementSystem;
+using Task = DAL.StorageLayer.Task.Task;
 
 namespace Reports.Tests
 {

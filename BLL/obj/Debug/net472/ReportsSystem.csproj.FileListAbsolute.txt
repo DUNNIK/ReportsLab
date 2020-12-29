@@ -1,0 +1,13 @@
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\bin\Debug\net472\ReportsSystem.exe.config
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\bin\Debug\net472\ReportsSystem.exe
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\bin\Debug\net472\ReportsSystem.pdb
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.csprojAssemblyReference.cache
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.AssemblyInfoInputs.cache
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.AssemblyInfo.cs
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.csproj.CoreCompileInputs.cache
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.exe
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.pdb
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\bin\Debug\net472\DAL.exe
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\bin\Debug\net472\DAL.pdb
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\bin\Debug\net472\DAL.exe.config
+C:\Users\NIKITOS\RiderProjects\ReportsLab\ReportsSystem\obj\Debug\net472\ReportsSystem.csproj.CopyComplete

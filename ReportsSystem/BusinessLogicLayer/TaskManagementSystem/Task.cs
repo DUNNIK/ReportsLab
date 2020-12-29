@@ -2,42 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using ReportsLab.BusinessLogicLayer.EmployeeSystem;
+using IEmployee = DAL.StorageLayer.Infrastructure.IEmployee;
 
 namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
 {
     public class Task
     {
-        public readonly string Id = Guid.NewGuid().ToString();
-        public readonly string Name;
-        public readonly string Description;
-        private IEmployee _assignedEmployee;
-        private State _currentState;
-        private List<string> _comments = new List<string>();
-        private readonly List<TaskMemento> _changes = new List<TaskMemento>();
-        private int _currentChange;
-        public enum State
-        {
-            Open,
-            Active,
-            Resolved
-        }
-
+        private DAL.StorageLayer.Task.Task _task;
         public Task(string name, string description)
         {
-            Name = name;
-            Description = description;
+            _task = new DAL.StorageLayer.Task.Task(name, description);
             ChangesUpdate();
         }
         public TaskMemento AddComment(string comment)
         {
-            _comments.Add(comment);
+            _task._comments.Add(comment);
             ChangesUpdate();
             return CreateNewMemento();
         }
 
         public TaskMemento AssignEmployee(IEmployee employee)
         {
-            _assignedEmployee = employee;
+            _task._assignedEmployee = employee;
             ChangesUpdate();
             return CreateNewMemento();
         }

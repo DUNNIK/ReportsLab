@@ -46,9 +46,22 @@
           "build/net35/NUnit3TestAdapter.props": {}
         }
       },
+      "DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "compile": {
+          "bin/placeholder/DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAL.dll": {}
+        }
+      },
       "ReportsSystem/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.2",
+        "dependencies": {
+          "DAL": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/ReportsSystem.dll": {}
         },
@@ -166,6 +179,11 @@
         "nunit3testadapter.3.16.1.nupkg.sha512",
         "nunit3testadapter.nuspec"
       ]
+    },
+    "DAL/1.0.0": {
+      "type": "project",
+      "path": "../DAL/DAL.csproj",
+      "msbuildProject": "../DAL/DAL.csproj"
     },
     "ReportsSystem/1.0.0": {
       "type": "project",

@@ -1,12 +1,42 @@
 {
   "version": 3,
   "targets": {
-    ".NETFramework,Version=v4.7.2": {},
-    ".NETFramework,Version=v4.7.2/win7-x86": {}
+    ".NETFramework,Version=v4.7.2": {
+      "DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "compile": {
+          "bin/placeholder/DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAL.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win7-x86": {
+      "DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.2",
+        "compile": {
+          "bin/placeholder/DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAL.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "DAL/1.0.0": {
+      "type": "project",
+      "path": "../DAL/DAL.csproj",
+      "msbuildProject": "../DAL/DAL.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.7.2": []
+    ".NETFramework,Version=v4.7.2": [
+      "DAL >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\NIKITOS\\.nuget\\packages\\": {},
@@ -39,7 +69,11 @@
       "frameworks": {
         "net472": {
           "targetAlias": "net472",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\DAL.csproj": {
+              "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\DAL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

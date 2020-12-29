@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj",
-    "projectName": "ReportsSystem",
-    "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\ReportsSystem.csproj",
-    "outputPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\ReportsSystem\\obj\\",
+    "projectUniqueName": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\DAL.csproj",
+    "projectName": "DAL",
+    "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\DAL.csproj",
+    "outputPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Microsoft\\Xamarin\\NuGet"
@@ -18,11 +18,7 @@
     },
     "frameworks": {
       "net472": {
-        "projectReferences": {
-          "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\DAL.csproj": {
-            "projectPath": "C:\\Users\\NIKITOS\\RiderProjects\\ReportsLab\\DAL\\DAL.csproj"
-          }
-        }
+        "projectReferences": {}
       }
     },
     "warningProperties": {

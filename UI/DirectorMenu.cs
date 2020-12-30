@@ -18,7 +18,10 @@ namespace UI
                 "7 - Make a daily report\n" +
                 "8 - Make a sprint report\n" +
                 "9 - Update sprint report\n" +
-                "10 - Assign a task to a subordinate\n"
+                "10 - Assign a task to a subordinate\n" +
+                "11 - Add a subordinate to the team\n" +
+                "12 - My Subordinates list\n" +
+                "13 - Close the current sprint report\n"
             );
         }
 
@@ -95,6 +98,19 @@ namespace UI
                         taskId = ReadLine();
                         var resultSubordinate = SearchSubordinate(director);
                         director.UpdateTaskEmployee(taskId, resultSubordinate);
+                        break;
+                    case 11:
+                        resultSubordinate = SearchSubordinate(director);
+                        director.AddNewSubordinate(resultSubordinate);
+                        break;
+                    case 12:
+                        foreach (var subordinate in director.Subordinates())
+                        {
+                            WriteLine(subordinate.ToString());
+                        }
+                        break;
+                    case 13:
+                        director.CloseCurrentSprintReport();
                         break;
                     default:
                         WriteLine("Wrong command!");

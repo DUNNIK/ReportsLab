@@ -86,6 +86,11 @@ namespace ReportsLab.EmployeeSystem
         {
             _sprintReport.Update(_resolvedTasks);
         }
+
+        public void CloseCurrentSprintReport()
+        {
+            _sprintReport = null;
+        }
         public void OpenTask(string id)
         {
             TaskManagementSystem.TaskManagementSystem.OpenTask(this, id);

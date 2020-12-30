@@ -84,6 +84,10 @@ namespace ReportsLab.EmployeeSystem
             _sprintReport ??= new SprintReport(Id, _dayReports);
             _sprintReport.CreateReport(name);
         }
+        public void CloseCurrentSprintReport()
+        {
+            _sprintReport = null;
+        }
         public string CreateTask(string name, string description)
         {
             return TaskManagementSystem.TaskManagementSystem.CreateTask(name, description);

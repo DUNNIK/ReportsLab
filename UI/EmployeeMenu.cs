@@ -18,7 +18,8 @@ namespace UI
                 "6 - Resolve Task\n" +
                 "7 - Make a daily report\n" +
                 "8 - Make a sprint report\n" +
-                "9 - Update sprint report\n"
+                "9 - Update sprint report\n" +
+                "10 - Close the current sprint report\n"
             );
         }
         public static void Call(Employee employee)
@@ -87,6 +88,12 @@ namespace UI
                         break;
                     case 9:
                         employee.UpdateSprintReport();
+                        break;
+                    case 10:
+                        employee.CloseCurrentSprintReport();
+                        break;
+                    default:
+                        WriteLine("Wrong command!");
                         break;
                 }
             }

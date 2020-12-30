@@ -22,7 +22,8 @@ namespace UI
                 "9 - Update sprint report\n" +
                 "10 - Assign a task to a subordinate\n" +
                 "11 - Add a subordinate to the team\n" +
-                "12 - My Subordinates list\n"
+                "12 - My Subordinates list\n" +
+                "13 - Close the current sprint report\n"
             );
         }
 
@@ -111,6 +112,9 @@ namespace UI
                         {
                             WriteLine(subordinate.ToString());
                         }
+                        break;
+                    case 13:
+                        teamLead.CloseCurrentSprintReport();
                         break;
                     default:
                         WriteLine("Wrong command!");

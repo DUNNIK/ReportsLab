@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DAL.StorageLayer.Report;
+using DAL.Entities.Report;
 
-namespace ReportsLab.BusinessLogicLayer.ReportingSystem
+namespace ReportsLab.ReportingSystem
 {
     public class DayReport : Report
     {

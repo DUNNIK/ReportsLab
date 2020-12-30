@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using DAL.StorageLayer.Task;
+using DAL.Entities.Task;
 using NUnit.Framework;
-using ReportsLab.BusinessLogicLayer.EmployeeSystem;
+using ReportsLab.EmployeeSystem;
 
 namespace Reports.Tests
 {
@@ -35,7 +35,7 @@ namespace Reports.Tests
         {
             var id = _teamLead.CreateTask("Task", "Task for create test");
             _teamLead.OpenTask(id);
-            Assert.That(_director.GetTask(id).ToString(), Is.EqualTo("Task task\nState: Open\nTask for create test\n"));
+            Assert.That(_director.GetTask(id).ToString(), Is.EqualTo($"Task task\nId: {id}\nState: Open\nTask for create test\n"));
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Reports.Tests
                 fileData1 = sr.ReadToEnd();
             }
 
-            Assert.That(fileData1, Is.EqualTo("Task task\nState: Resolved\nTask for create test\n"));
+            Assert.That(fileData1, Is.EqualTo($"Task task\nId: {id}\nState: Resolved\nTask for create test\n"));
         }
 
         [Test]
@@ -86,8 +86,8 @@ namespace Reports.Tests
                 fileData = sr.ReadToEnd();
             }
 
-            Assert.That(fileData1, Is.EqualTo("Make Physics task\nState: Resolved\nShit\n"));
-            Assert.That(fileData, Is.EqualTo("Make Physics task\nState: Resolved\nShit\n"));
+            Assert.That(fileData1, Is.EqualTo($"Make Physics task\nId: {_physicsTaskId}\nState: Resolved\nShit\n"));
+            Assert.That(fileData, Is.EqualTo($"Make Physics task\nId: {_physicsTaskId}\nState: Resolved\nShit\n"));
         }
 
         [Test]

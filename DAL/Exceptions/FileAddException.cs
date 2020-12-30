@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DAL.StorageLayer.Exceptions
+namespace DAL.Exceptions
 {
     public class FileAddException : Exception
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReportsLab.BusinessLogicLayer.Exceptions
+namespace ReportsLab.Exceptions
 {
     public class EmployeeUpdateException : Exception
     {

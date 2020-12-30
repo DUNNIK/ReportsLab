@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DAL.StorageLayer.Task;
+using DAL.Entities.Task;
 
-namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
+namespace ReportsLab.EmployeeSystem
 {
     public interface IDirector : IEmployee
     {

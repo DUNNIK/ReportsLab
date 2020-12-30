@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using DAL.StorageLayer.Task;
+using DAL.Entities.Task;
 
-namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
+namespace ReportsLab.EmployeeSystem
 {
     public interface ISubordinate : IEmployee
     {
         void GetNewDirector(IDirector director);
-        bool IsThereADirecter();
+        bool IsThereADirector();
         IDirector Director();
         IEnumerable<Task> AllResolved();
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DAL.StorageLayer.Report
+namespace DAL.Entities.Report
 {
     public static class ReportsData
     {

@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using DAL.Entities.Employee;
-using DAL.StorageLayer.Task;
-using ReportsLab.BusinessLogicLayer.ReportingSystem;
+using DAL.Entities.Task;
+using ReportsLab.ReportingSystem;
 
-namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
+namespace ReportsLab.EmployeeSystem
 {
     public class Employee : ISubordinate, IMethodsWithTasks
     {
+        private SprintReport _sprintReport;
         private readonly List<DayReport> _dayReports = new List<DayReport>();
         private IDirector _director;
-
         public Employee(string name, IDirector director)
         {
             EmployeeInfo = new DAL.Entities.Employee.Employee(name);
+            Id = EmployeeInfo.Id;
             _director = director;
             _director.AddNewSubordinate(this);
+            EmployeesManager.AllOrdinaryEmployees.Add(Id, this);
             EmployeeData.AllEmployees.Add(Id, EmployeeInfo);
         }
 
@@ -27,10 +29,14 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             report.CreateReport(name);
         }
 
+        public void UpdateSprintReport()
+        {
+            _sprintReport.Update(_dayReports);
+        }
         public void CreateSprintReport(string name)
         {
-            var sprintReport = new SprintReport(Id, _dayReports);
-            sprintReport.CreateReport(name);
+            _sprintReport ??= new SprintReport(Id, _dayReports);
+            _sprintReport.CreateReport(name);
         }
 
         public string CreateTask(string name, string description)
@@ -63,7 +69,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return TaskManagementSystem.TaskManagementSystem.Task(id)._task;
         }
 
-        public List<Task> MyTasks()
+        public IEnumerable<Task> MyTasks()
         {
             return TaskManagementSystem.TaskManagementSystem.TasksEmployee(Id);
         }
@@ -83,8 +89,8 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return TaskManagementSystem.TaskManagementSystem.TasksEmployeeChanged(employeeId);
         }
 
-        public DAL.StorageLayer.Infrastructure.IEmployee EmployeeInfo { get; }
-        public string Id { get; } = Guid.NewGuid().ToString();
+        public DAL.Infrastructure.IEmployee EmployeeInfo { get; }
+        public string Id { get; }
 
         public string Hierarchy()
         {
@@ -96,7 +102,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             _director = director;
         }
 
-        public bool IsThereADirecter()
+        public bool IsThereADirector()
         {
             return _director != null;
         }
@@ -125,6 +131,11 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         private DateTime LastReportTime()
         {
             return _dayReports.Count == 0 ? DateTime.Today : _dayReports.Last().CreateTime;
+        }
+
+        public override string ToString()
+        {
+            return EmployeeInfo.Name + " - " + Id + "\n";
         }
     }
 }

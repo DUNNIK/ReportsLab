@@ -2,45 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using DAL.Entities.Employee;
-using DAL.StorageLayer.Task;
-using ReportsLab.BusinessLogicLayer.Exceptions;
-using ReportsLab.BusinessLogicLayer.ReportingSystem;
+using DAL.Entities.Task;
+using ReportsLab.Exceptions;
+using ReportsLab.ReportingSystem;
 
-namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
+namespace ReportsLab.EmployeeSystem
 {
-    public class TeamLead : IDirector, IMethodsWithTasks
+    public class Director : IDirector, ISubordinate, IMethodsWithTasks
     {
+        private SprintReport _sprintReport;
         private readonly List<DayReport> _dayReports = new List<DayReport>();
         private readonly List<ISubordinate> _subordinates;
+        private IDirector _director;
 
-        public TeamLead(string name, List<ISubordinate> subordinates)
+        public Director(string name, IDirector director, List<ISubordinate> subordinates)
         {
             EmployeeInfo = new DAL.Entities.Employee.Employee(name);
+            Id = EmployeeInfo.Id;
+            _director = director;
             _subordinates = subordinates;
-            EmployeeData.TeamLeads.Add(EmployeeInfo);
+            _director.AddNewSubordinate(this);
+            EmployeesManager.AllDirectors.Add(Id, this);
             EmployeeData.AllEmployees.Add(Id, EmployeeInfo);
         }
 
-        public DAL.StorageLayer.Infrastructure.IEmployee EmployeeInfo { get; }
-        public string Id { get; } = Guid.NewGuid().ToString();
+        public DAL.Infrastructure.IEmployee EmployeeInfo { get; }
+        public string Id { get; }
 
         public string Hierarchy()
         {
-            var resultString = $"{EmployeeInfo.Name} - Team lead\n";
-            foreach (var subordinate in _subordinates) resultString += "\t" + subordinate.Hierarchy() + "\n";
+            var resultString = $"{EmployeeInfo} - director\n";
+            foreach (var subordinate in _subordinates) resultString += "\t\t" + subordinate.Hierarchy() + "\n";
 
             return resultString;
-        }
-
-        public void UpdateTaskEmployee(string taskId, IEmployee assigned)
-        {
-            if (!IsMySubordinate(assigned)) throw new EmployeeUpdateException();
-            TaskManagementSystem.TaskManagementSystem.UpdateTaskEmployee(this, taskId, assigned);
-        }
-
-        public List<Task> TasksAssignedToSubordinates()
-        {
-            return TaskManagementSystem.TaskManagementSystem.TasksAssignedToSubordinates(this);
         }
 
         public void AddNewSubordinate(ISubordinate subordinate)
@@ -63,9 +57,15 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return _subordinates;
         }
 
-        public string CreateTask(string name, string description)
+        public void UpdateTaskEmployee(string taskId, IEmployee assigned)
         {
-            return TaskManagementSystem.TaskManagementSystem.CreateTask(name, description);
+            if (!IsMySubordinate(assigned)) throw new EmployeeUpdateException();
+            TaskManagementSystem.TaskManagementSystem.UpdateTaskEmployee(this, taskId, assigned);
+        }
+
+        public List<Task> TasksAssignedToSubordinates()
+        {
+            return TaskManagementSystem.TaskManagementSystem.TasksAssignedToSubordinates(this);
         }
 
         public void CreateDayReport(string name)
@@ -75,11 +75,18 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             report.CreateReport(name);
         }
 
+        public void UpdateSprintReport()
+        {
+            _sprintReport.Update(_dayReports);
+        }
         public void CreateSprintReport(string name)
         {
-            var resolvedTasks = FindTeamResolvedTasks();
-            var sprintReport = new SprintReport(Id, resolvedTasks);
-            sprintReport.CreateReport(name);
+            _sprintReport ??= new SprintReport(Id, _dayReports);
+            _sprintReport.CreateReport(name);
+        }
+        public string CreateTask(string name, string description)
+        {
+            return TaskManagementSystem.TaskManagementSystem.CreateTask(name, description);
         }
 
         public void OpenTask(string id)
@@ -107,7 +114,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return TaskManagementSystem.TaskManagementSystem.Task(id)._task;
         }
 
-        public List<Task> MyTasks()
+        public IEnumerable<Task> MyTasks()
         {
             return TaskManagementSystem.TaskManagementSystem.TasksEmployee(Id);
         }
@@ -127,25 +134,60 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
             return TaskManagementSystem.TaskManagementSystem.TasksEmployeeChanged(employeeId);
         }
 
+        public IEnumerable<Task> AllResolved()
+        {
+            var result = new List<Task>();
+            AddMyResolvedTasks(result);
+            AddSubordinatesResolvedTasks(result);
+            return result;
+        }
+
+        public void GetNewDirector(IDirector newDirector)
+        {
+            _director = newDirector;
+        }
+
+        public bool IsThereADirector()
+        {
+            return _director != null;
+        }
+
+        IDirector ISubordinate.Director()
+        {
+            return _director;
+        }
+
+        private void AddMyResolvedTasks(ICollection<Task> result)
+        {
+            foreach (var task in from dayReport in _dayReports
+                from task in dayReport.Tasks
+                where !result.Contains(task)
+                select task)
+                result.Add(task);
+        }
+
+        private void AddSubordinatesResolvedTasks(ICollection<Task> result)
+        {
+            foreach (var task in from subordinate in _subordinates
+                from task in subordinate.AllResolved()
+                where !result.Contains(task)
+                select task)
+                result.Add(task);
+        }
+
         private DateTime LastReportTime()
         {
             return _dayReports.Count == 0 ? DateTime.Today : _dayReports.Last().CreateTime;
         }
 
-        private List<Task> FindTeamResolvedTasks()
-        {
-            var result = new List<Task>();
-            foreach (var task in from subordinate in _subordinates
-                from task in subordinate.AllResolved()
-                where !result.Contains(task)
-                select task) result.Add(task);
-
-            return result;
-        }
-
         private bool IsMySubordinate(IEmployee assigned)
         {
             return _subordinates.Contains(assigned);
+        }
+
+        public override string ToString()
+        {
+            return EmployeeInfo.Name + " - " + Id + "\n";
         }
     }
 }

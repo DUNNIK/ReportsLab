@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DAL.StorageLayer.Infrastructure;
+using DAL.Infrastructure;
 
-namespace DAL.StorageLayer.Task
+namespace DAL.Entities.Task
 {
     public class Task
     {
@@ -31,7 +31,7 @@ namespace DAL.StorageLayer.Task
 
         public override string ToString()
         {
-            return $"{Name} task\nState: {CurrentState.ToString()}\n{Description}\n";
+            return $"{Name} task\nId: {Id}\nState: {CurrentState.ToString()}\n{Description}\n";
         }
 
         public DateTime LastChangeDateTime()

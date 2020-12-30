@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using DAL.StorageLayer.Infrastructure;
+using DAL.Infrastructure;
 
-namespace DAL.StorageLayer.Task
+namespace DAL.Entities.Task
 {
     public class TaskMemento
     {
         public List<string> Comments;
         public DateTime CreateTime = DateTime.Now;
         public IEmployee Employee;
-        public Task.State State;
-        public Task TaskReference;
+        public Entities.Task.Task.State State;
+        public Entities.Task.Task TaskReference;
 
-        public TaskMemento(Task.State state, IEmployee employee, List<string> comments, Task taskReference)
+        public TaskMemento(Entities.Task.Task.State state, IEmployee employee, List<string> comments, Entities.Task.Task taskReference)
         {
             State = state;
             Employee = employee;

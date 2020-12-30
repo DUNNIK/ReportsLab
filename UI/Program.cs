@@ -6,7 +6,14 @@ namespace UI
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                EmployeeSelection.Call();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

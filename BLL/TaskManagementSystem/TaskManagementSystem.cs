@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DAL.StorageLayer.Task;
-using ReportsLab.BusinessLogicLayer.EmployeeSystem;
+using DAL.Entities.Task;
+using ReportsLab.EmployeeSystem;
 
-namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
+namespace ReportsLab.TaskManagementSystem
 {
     public static class TaskManagementSystem
     {
-        public static readonly Dictionary<string, List<Task>> TasksByEmployeeId = new Dictionary<string, List<Task>>();
-        public static readonly Dictionary<string, Task> TasksById = new Dictionary<string, Task>();
+        private static readonly Dictionary<string, List<Task>> TasksByEmployeeId = new Dictionary<string, List<Task>>();
+        private static readonly Dictionary<string, Task> TasksById = new Dictionary<string, Task>();
 
         public static void OpenTask(IEmployee creator, string id)
         {
@@ -36,14 +36,14 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
             return TasksById[taskId];
         }
 
-        public static List<DAL.StorageLayer.Task.Task> TasksEmployee(string employeeId)
+        public static List<DAL.Entities.Task.Task> TasksEmployee(string employeeId)
         {
             return TasksByEmployeeId[employeeId].Select(task => task._task).ToList();
         }
 
-        public static List<DAL.StorageLayer.Task.Task> TasksByChangeCreateTime(DateTime changesTime)
+        public static List<DAL.Entities.Task.Task> TasksByChangeCreateTime(DateTime changesTime)
         {
-            var result = new List<DAL.StorageLayer.Task.Task>();
+            var result = new List<DAL.Entities.Task.Task>();
             foreach (var change in from employeeChanges in TaskData.ChangesByEmployeeId.Values
                 from change in employeeChanges
                 where change.CreateTime == changesTime && !result.Contains(change.TaskReference)
@@ -52,28 +52,28 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
             return result;
         }
 
-        public static List<DAL.StorageLayer.Task.Task> TasksByLastChangeTime(DateTime changesTime)
+        public static List<DAL.Entities.Task.Task> TasksByLastChangeTime(DateTime changesTime)
         {
             return TaskData.TasksById.Values.Where(task => changesTime == task.LastChangeDateTime()).ToList();
         }
 
-        public static List<DAL.StorageLayer.Task.Task> TasksEmployeeChanged(string employeeId)
+        public static List<DAL.Entities.Task.Task> TasksEmployeeChanged(string employeeId)
         {
             return TaskData.ChangesByEmployeeId[employeeId].Select(changes => changes.TaskReference).ToList();
         }
 
-        public static List<DAL.StorageLayer.Task.Task> TasksAssignedToSubordinates(IDirector director)
+        public static List<DAL.Entities.Task.Task> TasksAssignedToSubordinates(IDirector director)
         {
             return director.Subordinates().SelectMany(subordinate => TasksEmployee(subordinate.Id)).ToList();
         }
 
-        public static List<DAL.StorageLayer.Task.Task> EmployeeResolvedTasksForPeriod(string employeeId,
+        public static List<DAL.Entities.Task.Task> EmployeeResolvedTasksForPeriod(string employeeId,
             DateTime lowTime)
         {
-            var result = new List<DAL.StorageLayer.Task.Task>();
+            var result = new List<DAL.Entities.Task.Task>();
             foreach (var change in TaskData.ChangesByEmployeeId[employeeId].Where(change =>
                 change.CreateTime > lowTime && !result.Contains(change.TaskReference) &&
-                change.State == DAL.StorageLayer.Task.Task.State.Resolved))
+                change.State == DAL.Entities.Task.Task.State.Resolved))
                 result.Add(change.TaskReference);
 
             return result;
@@ -95,6 +95,7 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
         private static void AddToTaskByIdDatabase(string taskId, Task task)
         {
             TasksById.Add(taskId, task);
+            TaskData.TasksById.Add(taskId, task._task);
         }
 
         private static void AddToChangesDatabase(string employeeId, TaskMemento memento)
@@ -111,7 +112,7 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
 
         private static void CreateNewIfNotIdTasksByEmployeeId(string id)
         {
-            if (!TaskData.TasksByEmployeeId.ContainsKey(id)) TasksByEmployeeId.Add(id, new List<Task>());
+            if (!TasksByEmployeeId.ContainsKey(id)) TasksByEmployeeId.Add(id, new List<Task>());
         }
 
         private static void CreateNewIfNotIdChanges(string id)

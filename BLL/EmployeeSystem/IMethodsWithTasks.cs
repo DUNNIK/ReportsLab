@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using DAL.StorageLayer.Task;
+using DAL.Entities.Task;
 
-namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
+namespace ReportsLab.EmployeeSystem
 {
-    internal interface IMethodsWithTasks
+    public interface IMethodsWithTasks : IEmployee
     {
         string CreateTask(string name, string description);
         void CreateDayReport(string name);
@@ -14,7 +14,7 @@ namespace ReportsLab.BusinessLogicLayer.EmployeeSystem
         void ResolveTask(string id);
         void CreateCommit(string taskId, string commit);
         Task GetTask(string id);
-        List<Task> MyTasks();
+        IEnumerable<Task> MyTasks();
         List<Task> TasksByChangeCreateTime(DateTime dateTime);
         List<Task> TasksByLastChangeTime(DateTime changesTime);
         List<Task> TasksEmployeeChanged(string employeeId);

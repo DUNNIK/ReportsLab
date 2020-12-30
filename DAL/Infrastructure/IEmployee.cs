@@ -1,4 +1,4 @@
-﻿namespace DAL.StorageLayer.Infrastructure
+﻿namespace DAL.Infrastructure
 {
     public interface IEmployee
     {

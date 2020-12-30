@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DAL.StorageLayer.Report;
-using DAL.StorageLayer.Task;
+using DAL.Entities.Report;
+using DAL.Entities.Task;
 
-namespace ReportsLab.BusinessLogicLayer.ReportingSystem
+namespace ReportsLab.ReportingSystem
 {
     public class SprintReport : Report
     {
-        public SprintReport(string userId, List<DayReport> sprint)
+        public SprintReport(string userId, IEnumerable<DayReport> sprint)
         {
             Tasks = SelectAllTasksForSprint(sprint);
             AddToReportsData(userId);
@@ -19,7 +19,15 @@ namespace ReportsLab.BusinessLogicLayer.ReportingSystem
             AddToReportsData(userId);
         }
 
-        private List<Task> SelectAllTasksForSprint(List<DayReport> sprint)
+        public void Update(IEnumerable<DayReport> sprint)
+        {
+            Tasks = SelectAllTasksForSprint(sprint);
+        }
+        public void Update(List<Task> resolvedTasks)
+        {
+            Tasks = resolvedTasks;;
+        }
+        private List<Task> SelectAllTasksForSprint(IEnumerable<DayReport> sprint)
         {
             var result = new List<Task>();
             foreach (var task in from report in sprint

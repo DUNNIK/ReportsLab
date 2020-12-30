@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace DAL.StorageLayer
+namespace DAL
 {
     public static class Storage
     {

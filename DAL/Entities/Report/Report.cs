@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DAL.StorageLayer.Report
+namespace DAL.Entities.Report
 {
     public abstract class Report
     {
@@ -14,7 +14,7 @@ namespace DAL.StorageLayer.Report
             return Tasks;
         }
 
-        public void CreateReport(string name)
+        public virtual void CreateReport(string name)
         {
             var resultString = Tasks.Aggregate("", (current, task) => current + task);
             Storage.CreateFile(name, resultString);

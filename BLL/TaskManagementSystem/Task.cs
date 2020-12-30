@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using DAL.StorageLayer.Task;
-using ReportsLab.BusinessLogicLayer.EmployeeSystem;
+using DAL.Entities.Task;
+using ReportsLab.EmployeeSystem;
 
-namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
+namespace ReportsLab.TaskManagementSystem
 {
     public class Task
     {
-        public DAL.StorageLayer.Task.Task _task;
+        public DAL.Entities.Task.Task _task;
 
         public Task(string name, string description)
         {
-            _task = new DAL.StorageLayer.Task.Task(name, description);
+            _task = new DAL.Entities.Task.Task(name, description);
             Id = _task.Id;
             ChangesUpdate();
         }
@@ -80,32 +80,32 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
 
         public TaskMemento Open()
         {
-            if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Active ||
-                _task.CurrentState == DAL.StorageLayer.Task.Task.State.Resolved) return null;
-            _task.CurrentState = DAL.StorageLayer.Task.Task.State.Open;
+            if (_task.CurrentState == DAL.Entities.Task.Task.State.Active ||
+                _task.CurrentState == DAL.Entities.Task.Task.State.Resolved) return null;
+            _task.CurrentState = DAL.Entities.Task.Task.State.Open;
 
             return CreateNewMemento();
         }
 
         public TaskMemento Active()
         {
-            if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Open)
-                _task.CurrentState = DAL.StorageLayer.Task.Task.State.Active;
+            if (_task.CurrentState == DAL.Entities.Task.Task.State.Open)
+                _task.CurrentState = DAL.Entities.Task.Task.State.Active;
 
             return CreateNewMemento();
         }
 
         public TaskMemento Resolved()
         {
-            if (_task.CurrentState == DAL.StorageLayer.Task.Task.State.Active)
-                _task.CurrentState = DAL.StorageLayer.Task.Task.State.Resolved;
+            if (_task.CurrentState == DAL.Entities.Task.Task.State.Active)
+                _task.CurrentState = DAL.Entities.Task.Task.State.Resolved;
 
             return CreateNewMemento();
         }
 
         public override string ToString()
         {
-            return $"{_task.Name} task\nState: {_task.CurrentState.ToString()}\n{_task.Description}\n";
+            return $"{_task.Name} task\nId: {Id}\nState: {_task.CurrentState.ToString()}\n{_task.Description}\n";
         }
 
         public DateTime LastChangeDateTime()
@@ -113,7 +113,7 @@ namespace ReportsLab.BusinessLogicLayer.TaskManagementSystem
             return _task.Changes.Last().CreateTime;
         }
 
-        public DAL.StorageLayer.Task.Task.State Status()
+        public DAL.Entities.Task.Task.State Status()
         {
             return _task.CurrentState;
         }

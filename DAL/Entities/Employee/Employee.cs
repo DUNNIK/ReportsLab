@@ -1,5 +1,5 @@
 ﻿using System;
-using DAL.StorageLayer.Infrastructure;
+using DAL.Infrastructure;
 
 namespace DAL.Entities.Employee
 {
@@ -12,5 +12,9 @@ namespace DAL.Entities.Employee
 
         public string Id { get; } = Guid.NewGuid().ToString();
         public string Name { get; }
+        public override string ToString()
+        {
+            return Name + " - " + Id + "\n";
+        }
     }
 }

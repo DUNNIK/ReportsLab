@@ -47,7 +47,6 @@ namespace ReportsLab.EmployeeSystem
 
         public void AddNewSubordinate(ISubordinate subordinate)
         {
-            //if (subordinate.IsThereADirecter()) throw new DirecterException();
             _subordinates.Add(subordinate);
             subordinate.GetNewDirector(this);
         }

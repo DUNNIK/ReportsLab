@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using DAL.Entities.Task;
 using ReportsLab.EmployeeSystem;
@@ -71,6 +72,7 @@ namespace ReportsLab.TaskManagementSystem
             DateTime lowTime)
         {
             var result = new List<DAL.Entities.Task.Task>();
+            if (!TaskData.ChangesByEmployeeId.ContainsKey(employeeId)) throw new DataException();
             foreach (var change in TaskData.ChangesByEmployeeId[employeeId].Where(change =>
                 change.CreateTime > lowTime && !result.Contains(change.TaskReference) &&
                 change.State == DAL.Entities.Task.Task.State.Resolved))

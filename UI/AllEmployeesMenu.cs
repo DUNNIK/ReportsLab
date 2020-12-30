@@ -1,10 +1,12 @@
-﻿using static System.Console;
+﻿using DAL.Entities.Employee;
+using ReportsLab.EmployeeSystem;
+using static System.Console;
 
 namespace UI
 {
     public static class AllEmployeesMenu
     {
-        private static void PrintCreateEmployeeMenu()
+        private static void PrintAllEmployeeMenu()
         {
             WriteLine(
                 "0 - Exit\n" +
@@ -21,7 +23,7 @@ namespace UI
             var command = 0;
             while (!exit)
             {
-                PrintCreateEmployeeMenu();
+                PrintAllEmployeeMenu();
                 try
                 {
                     command = int.Parse(ReadLine());
@@ -37,13 +39,28 @@ namespace UI
                         exit = true;
                         break;
                     case 1:
-                        
+                        foreach (var employee in EmployeeData.AllEmployees.Values)
+                        {
+                            WriteLine(employee.ToString());
+                        }
                         break;
                     case 2:
+                        foreach (var employee in EmployeesManager.AllOrdinaryEmployees.Values)
+                        {
+                            WriteLine(employee.ToString());
+                        }
                         break;
                     case 3:
+                        foreach (var employee in EmployeesManager.AllDirectors.Values)
+                        {
+                            WriteLine(employee.ToString());
+                        }
                         break;
                     case 4:
+                        foreach (var employee in EmployeesManager.AllTeamLeads.Values)
+                        {
+                            WriteLine(employee.ToString());
+                        }
                         break;
 
                 }
